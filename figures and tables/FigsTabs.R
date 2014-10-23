@@ -39,7 +39,7 @@ Fiji2013 <- Fiji2013[order(order(orderData)),]
 Fiji2013 <- subset(Fiji2013, select=c("goal", "score", "status", "future", "trend", "pressures", "resilience"))
 
 ## requires loading the function below:
-flowerPlots(Fiji2013, "figures and tables/FijiFlowerPlot2013OHI_Oct9_2014.png")
+flowerPlots(Fiji2013, "figures and tables/FijiFlowerPlot2013OHI_Oct22_2014.png")
 
 
 ## EEZ data----
@@ -52,7 +52,7 @@ EEZ2013 <- EEZ2013[order(order(orderData)),]
 EEZ2013 <- subset(EEZ2013, select=c("goal", "score", "status", "future", "trend", "pressures", "resilience"))
 
 ## requires loading the function below:
-flowerPlots(EEZ2013, "figures and tables/EEZFlowerPlot2013OHI_Oct9_2014.png")
+flowerPlots(EEZ2013, "figures and tables/EEZFlowerPlot2013OHI_Oc2_2014.png")
 
 ## function ----
 flowerPlots <- function(plotData=data, name="FijiFlowerPlot.png"){
@@ -61,7 +61,7 @@ flowerPlots <- function(plotData=data, name="FijiFlowerPlot.png"){
   plotData <- data.frame(t(plotData))
   plotData <- subset(plotData, select=c("Index", "FIS", "MAR", "AO", "NP", "CS", "CP", "TR", 
                                         "LIV", "ECO", "ICO", "LSP", "CW", "HAB", "SPP"))
-  plotData <- rename(plotData, c("NP"= "Natural Products",
+  plotData <- plyr::rename(plotData, c("NP"= "Natural Products",
                                  "AO"= "Artisanal Fishing \n Opportunities",
                                  "MAR"="Mariculture",
                                  "FIS"="Fisheries",
