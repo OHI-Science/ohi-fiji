@@ -4,6 +4,7 @@
 ##########################################
 source('../ohiprep/src/R/common.R')
 
+
 library(tidyr)
 
 
@@ -224,3 +225,4 @@ cmpa_ohi  <- cmpa_ohi %>%
 
 cmpa <- rbind(cmpa_ohi, cmpa_effective_area)
 write.csv(cmpa, "fiji2013/layers/lsp_prot_area_offshore3nm.csv", row.names=FALSE)
+
