@@ -17,8 +17,7 @@ dirs = list(
 scenario <- 'fiji2013'
 
 # load ohicore (must first download using directions from here: )
-library(ohicore) # or 
-#devtools::load_all(dirs$ohicore)
+devtools::load_all('../ohicore')
 library(stringr)
 
   
