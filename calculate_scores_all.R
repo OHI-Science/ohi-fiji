@@ -26,12 +26,12 @@ library(stringr)
 conf   = Conf(sprintf('%s/conf', scenario))
     
     # run checks on layers
-    CheckLayers(layers.csv = sprintf('%s/layers.csv', scenario), 
+  CheckLayers(layers.csv = sprintf('%s/layers.csv', scenario), 
                 layers.dir = sprintf('%s/layers', scenario), 
                 flds_id    = conf$config$layers_id_fields)
   
   
-    conf   = Conf(sprintf('%s/conf', scenario))
+  conf   = Conf(sprintf('%s/conf', scenario))
     layers = Layers(sprintf('%s/layers.csv', scenario), sprintf('%s/layers', scenario))
     
     # calculate scores 
