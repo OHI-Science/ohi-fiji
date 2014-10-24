@@ -1,5 +1,11 @@
 ### Manuscript tables and figures
 library(tidyr)
+library(RColorBrewer)
+library(colorspace)
+library(ggplot2)
+library(grid)
+source('https://www.nceas.ucsb.edu/~frazier/myTheme.txt')
+
 
 source('../ohiprep/src/R/common.R')
 
@@ -21,6 +27,41 @@ Fiji2013 <- read.csv("fiji2013/scores.csv") %>%
                                       'CW', 'SP', 'LSP', 'ICO', 'LE', 'ECO', 'LIV', 'TR', 'CP', 'CS'))) %>%
   arrange(goal)
 write.csv(Fiji2013, "figures and tables/Fiji2013.csv", na="", row.names=FALSE)
+
+### Table for OHI2013 Fiji scores:
+OHI2013 <- read.csv("fiji2013/scores_2013EEZ.csv") %>%
+  filter(region_id==18) %>%
+  spread(dimension, score) %>%
+  select(goal, score, status, future, trend, pressures, resilience) %>%
+  mutate(goal = factor(goal, levels=c('Index', 'NP', 'AO', 'FP', 'MAR', 'FIS', 'BD', 'SPP', 'HAB',
+                                      'CW', 'SP', 'LSP', 'ICO', 'LE', 'ECO', 'LIV', 'TR', 'CP', 'CS'))) %>%
+  arrange(goal)
+write.csv(OHI2013, "figures and tables/OHI2013.csv", na="", row.names=FALSE)
+
+## compare Fiji score with other regions
+OHI2013_eez <- read.csv("fiji2013/scores_2013EEZ.csv") %>%
+  filter(goal == "Index") %>%
+  filter(!(region_id %in% c(0, 18, 213)))
+
+ggplot(data=subset(OHI2013_eez, dimension=="score"), aes(x=score)) +
+  geom_histogram(fill="gray", color="black") +
+  geom_vline(xintercept=72, color="red", size=1) +
+  myTheme +
+  labs(x="Score")
+ggsave('figures and tables/EEZscores_score.png')
+
+ggplot(data=subset(OHI2013_eez, dimension=="future"), aes(x=score)) +
+  geom_histogram(fill="gray", color="black") +
+  geom_vline(xintercept=68, color="red", size=1) +
+  myTheme +
+  labs(x="future")
+ggsave('figures and tables/EEZscores_future.png')
+
+read.csv("fiji2013/scores_2013EEZ.csv") %>%
+  filter(goal == "Index") %>%
+  filter(!(region_id %in% c(0, 18, 213))) %>%
+  group_by(dimension) %>%
+  summarize(mean=mean(score))
 
 
 #-----------------------------------------------------------
@@ -189,11 +230,6 @@ summary(mod)
 
 
 ## some summaries:
-library(RColorBrewer)
-library(colorspace)
-library(ggplot2)
-library(grid)
-source('https://www.nceas.ucsb.edu/~frazier/myTheme.txt')
 
 ggplot(Fiji_data_bbmsy, aes(x=b_bmsy, fill=as.factor(Trend2))) +
   geom_dotplot(stackgroups=TRUE,method="histodot", binwidth=1/30, shape=19) +
@@ -238,4 +274,10 @@ tmp2 <- unique(subset(tmp, select=c(TaxonName, fao_id, TaxonPenaltyCode)))
 table(tmp2$TaxonPenaltyCode)
 sum(table(tmp2$TaxonPenaltyCode))
 tmp2[tmp2$TaxonPenaltyCode<4,]
+
+
+
+#-----------------------------------------------------------
+# Comparing with OHI region scores
+#-----------------------------------------------------------
 
