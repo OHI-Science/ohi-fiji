@@ -63,6 +63,34 @@ read.csv("fiji2013/scores_2013EEZ.csv") %>%
   group_by(dimension) %>%
   summarize(mean=mean(score))
 
+#-----------------------------------------------------------
+# Common fish names ----
+#-----------------------------------------------------------
+ao <- read.csv("fiji2013/layers/ao_taxa.csv")
+commonNames <- read.csv(file.path(dir_neptune_data, "model/GL-SAUP-FisheriesCatchData_v2013/tmp/saup_stocks-catch_by_saup-eez.csv"))
+
+commonNames2 <- commonNames %>%
+  select(species=TaxonName, CommonName) %>%
+  mutate(species = as.character(species))
+commonNames2 <- unique(commonNames2)
+
+ao <- ao %>%
+  mutate(species = as.character(species)) %>%
+  left_join(commonNames2) %>%
+  mutate(CommonName = as.character(CommonName))
+ao$CommonName[ao$species == "Shrimps, prawns"] = "Shrimps, prawns"
+ao$CommonName[ao$species == "Marine fishes not identified"] = "Marine fishes not identified"
+ao$CommonName[ao$species == "Chanos chanos"] = "Milkfish"
+ao$CommonName[ao$species == "Holothuriidae"] = "Sea cucumbers"
+ao$CommonName[ao$species == "Miscellaneous marine crustaceans"] = "Miscellaneous marine crustaceans"
+ao$CommonName[ao$species == "Miscellaneous aquatic invertebrates"] = "Miscellaneous aquatic invertebrates"
+ao$CommonName[ao$species == "Sphyraenidae"] = "Barracudas"
+ao$CommonName[ao$species == "Kajikia audax"] = "Striped marlin"
+ao$CommonName[ao$species == "Istiompax indica"] = "Black marlin"
+ao <- ao[ao$species != "Shrimps and prawns", ]
+ao <- unique(ao)
+
+write.csv(ao, "figures and tables/ao_species_w_common_names.csv", row.names=FALSE)
 
 #-----------------------------------------------------------
 # Flower plots of data
