@@ -25,20 +25,36 @@ Fiji2013 <- read.csv("fiji2013/scores.csv") %>%
   select(goal, score, status, future, trend, pressures, resilience) %>%
   mutate(goal = factor(goal, levels=c('Index', 'NP', 'AO', 'FP', 'MAR', 'FIS', 'BD', 'SPP', 'HAB',
                                       'CW', 'SP', 'LSP', 'ICO', 'LE', 'ECO', 'LIV', 'TR', 'CP', 'CS'))) %>%
-  arrange(goal)
-write.csv(Fiji2013, "figures and tables/Fiji2013.csv", na="", row.names=FALSE)
+  arrange(goal) %>%
+  mutate(score=round(score, 0)) %>%
+  mutate(status=round(status, 0)) %>%
+  mutate(future=round(future, 0)) %>%
+  mutate(pressures=round(pressures, 0)) %>%
+  mutate(resilience=round(resilience,0))
+
+
+write.csv(Fiji2013, "figures and tables/Fiji2013_round0.csv", na="", row.names=FALSE)
 
 ### Table for OHI2013 Fiji scores:
-OHI2013 <- read.csv("fiji2013/scores_2013EEZ.csv") %>%
+OHI2013 <- read.csv("fiji2013/scoresEEZ2013.csv") %>%
   filter(region_id==18) %>%
   spread(dimension, score) %>%
   select(goal, score, status, future, trend, pressures, resilience) %>%
   mutate(goal = factor(goal, levels=c('Index', 'NP', 'AO', 'FP', 'MAR', 'FIS', 'BD', 'SPP', 'HAB',
                                       'CW', 'SP', 'LSP', 'ICO', 'LE', 'ECO', 'LIV', 'TR', 'CP', 'CS'))) %>%
-  arrange(goal)
-write.csv(OHI2013, "figures and tables/OHI2013.csv", na="", row.names=FALSE)
+  arrange(goal) %>%
+  mutate(score=round(score, 0)) %>%
+  mutate(status=round(status, 0)) %>%
+  mutate(future=round(future, 0)) %>%
+  mutate(pressures=round(pressures, 0)) %>%
+  mutate(resilience=round(resilience,0))
+
+write.csv(OHI2013, "figures and tables/OHI2013_round0.csv", na="", row.names=FALSE)
 
 ## compare Fiji score with other regions
+read.csv("fiji2013/scoresEEZ2013.csv") %>%
+  filter(goal=="Index" & region_id==0)
+
 OHI2013_eez <- read.csv("fiji2013/scores_2013EEZ.csv") %>%
   filter(goal == "Index") %>%
   filter(!(region_id %in% c(0, 18, 213)))
