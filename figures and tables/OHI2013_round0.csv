@@ -1,20 +1,20 @@
-"goal","score","status","future","trend","pressures","resilience"
-"Index",69,,65,,,
-"NP",36,36,35,-0.09,50,60
-"AO",46,44,48,0,32,58
-"FP",87,77,98,0.29,,
-"MAR",0,0,0,0,34,44
-"FIS",87,77,98,0.29,34,56
-"BD",78,87,69,-0.37,,
-"SPP",77,83,72,-0.26,39,50
-"HAB",79,91,67,-0.48,36,54
-"CW",74,75,73,0.11,76,44
-"SP",74,76,71,-0.18,,
-"LSP",96,96,96,0,45,44
-"ICO",51,56,46,-0.36,38,57
-"LE",66,78,53,-0.5,,
-"ECO",79,79,79,-0.04,36,47
-"LIV",52,77,27,-0.96,36,35
-"TR",97,100,93,0,66,44
-"CP",77,80,75,-0.12,48,52
-"CS",56,82,31,-1,39,52
+goal,score,status,future,trend,pressures,resilience
+Index,69,,65,,,
+Natural Products,36,36,35,-0.09,50,60
+Artisanal Fishing Opportunities,46,44,48,0,32,58
+Food Provision,87,77,98,0.29,,
+Mariculture,0,0,0,0,34,44
+Fisheries,87,77,98,0.29,34,56
+Biodiversity,78,87,69,-0.37,,
+Species,77,83,72,-0.26,39,50
+Habitats,79,91,67,-0.48,36,54
+Clean Waters,74,75,73,0.11,76,44
+Sense of Place,74,76,71,-0.18,,
+Lasting Special Places,96,96,96,0,45,44
+Iconic Species,51,56,46,-0.36,38,57
+Livelihoods and Economies,66,78,53,-0.5,,
+Economies,79,79,79,-0.04,36,47
+Livelihoods,52,77,27,-0.96,36,35
+Tourism and Recreation,97,100,93,0,66,44
+Coastal protection,77,80,75,-0.12,48,52
+Carbon storage,56,82,31,-1,39,52
